@@ -64,7 +64,7 @@ To maintain system hygiene and protect academic data, a dedicated macOS User Pro
 
 ### **Storage Strategy**
 All assets are persistent on an external **2TB SSD**, formatted for optimal Apple Silicon throughput and encrypted for data security.
-![Disk Utility formatting the LaCie drive as APFS Encrypted](Arath_Driver_Format.jpg)
+![Disk Utility formatting the LaCie drive as APFS Encrypted](Arath_Driver_Format.png)
 
 ---
 
@@ -89,18 +89,18 @@ The lab utilizes a dual-homed configuration to isolate internal traffic from the
 ### **Virtual Hardware Configuration**
 The following screenshots confirm the precise mapping of the virtual network adapters and subnets within VMware Fusion.
 
-**Adapter 1 (WAN - em0)** ![VMware settings showing Network Adapter 1 set to Bridged Autodetect](FreeBSD_14_Network_Adapter_Config.jpg)
+**Adapter 1 (WAN - em0)** ![VMware settings showing Network Adapter 1 set to Bridged Autodetect](FreeBSD_14_Network_Adapter_Config.png)
 
-**Adapter 2 (LAN - em1)** ![VMware settings showing Network Adapter 2 set to Custom DPS_INTERNAL_NETWORK](FreeBSD_14_Network_Adapter_2_Config.jpg)
+**Adapter 2 (LAN - em1)** ![VMware settings showing Network Adapter 2 set to Custom DPS_INTERNAL_NETWORK](FreeBSD_14_Network_Adapter_2_Config.png)
 
-**Hypervisor Level Network (Subnet Definition)** ![VMware Network Preferences showing DPS_INTERNAL_NETWORK defined as 10.0.50.0](DPS_Internal_Network_Config.jpg)
+**Hypervisor Level Network (Subnet Definition)** ![VMware Network Preferences showing DPS_INTERNAL_NETWORK defined as 10.0.50.0](DPS_Internal_Network_Config.png)
 
 ---
 
 ## 4. Console Configuration & Implementation
 The OPNsense kernel was initialized through the terminal console. I successfully transitioned the LAN from the factory default (`192.168.1.1`) to the custom lab subnet (`10.0.50.1`).
 
-**Interface Overview (Post-Provisioning)** ![OPNsense console showing LAN (em0) successfully set to 10.0.50.1/24](OPNsense_LAN_WAN.jpg)
+**Interface Overview (Post-Provisioning)** ![OPNsense console showing LAN (em0) successfully set to 10.0.50.1/24](OPNsense_LAN_WAN.png)
 
 ### **Key Console Commands & Security**
 * **DHCP Scope**: Established a stateful range of `10.0.50.100` to `10.0.50.200`.
@@ -111,7 +111,7 @@ The OPNsense kernel was initialized through the terminal console. I successfully
 ## 5. Client Integration (Windows 11)
 The internal Windows 11 client was bridged to the `DPS_INTERNAL_NETWORK\`. Upon rebooting, the client successfully "handshaked" with the OPNsense gateway via DHCP.
 
-**Client Network Verification (ipconfig)** ![Windows 11 terminal showing initial assigned IP](Screenshot_2026-02-09_at_1.27.45_AM.png)  
+**Client Network Verification (ipconfig)** ![Windows 11 terminal showing initial assigned IP](Worl_Station_Conection_DPS_INTERNAL_NETWORK.png)  
 *(Note: Final validation confirmed the transition to the 10.0.50.100+ range after the OPNsense DHCP service was fully initialized.)*
 
 ---
