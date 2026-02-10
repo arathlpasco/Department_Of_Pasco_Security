@@ -93,7 +93,7 @@ The following screenshots confirm the precise mapping of the virtual network ada
 
 <img width="1920" height="1080" alt="FreeBSD_14_Network_Adapter_2_Config" src="https://github.com/user-attachments/assets/6ed8d11c-1e2e-4d8c-abd8-d51849cdbf9a" />
 
-**Hypervisor Level Network (Subnet Definition)
+**Hypervisor Level Network (Subnet Definition)**
 
 <img width="1920" height="1080" alt="DPS_Internal_Network_Config" src="https://github.com/user-attachments/assets/89dc12e5-2287-4b02-b6c0-85c9e0fdfc23" />
 
