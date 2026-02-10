@@ -44,14 +44,12 @@ During Phase 1, I successfully navigated several "real-world" IT hurdles:
 * **Cold Boot Syncing**: Identified that VMware hardware changes (like adding vNICs) require a full VM shutdown to be recognized by the OPNsense kernel.
 * **Protocol Validation**: Corrected a configuration loop by identifying and resolving an input error where IPv4 parameters were erroneously entered into IPv6 fields.
 
-* ## 📂 Project Phases
-
 ## 📂 Project Phases
 
 <details>
-<summary><b>Click to expand: Phase 1 - Gateway Provisioning (Technical Documentation)</b></summary>
+<summary><b>Click to expand: Phase 1 - Windows 11 Pro Workstation and OPNsense Installation (Technical Documentation)</b></summary>
 
-# Technical Documentation: Phase 1 - Gateway Provisioning
+# Technical Documentation: Phase 1 - Windows 11 Pro Workstation and OPNsense Installation
 **Project:** Department of Pasco Security (DPS) Home Lab  
 **Author:** Arath Luis Pasco  
 **Date:** February 9, 2026  
@@ -63,7 +61,7 @@ To maintain system hygiene and protect academic data, a dedicated macOS User Pro
 
 ### **Storage Strategy**
 All assets are persistent on an external **2TB SSD**, formatted for optimal Apple Silicon throughput and encrypted for data security.
-![Disk Utility formatting the LaCie drive as APFS Encrypted](Arath_Driver_Format.png)
+![Disk Utility formatting the LaCie drive as APFS Encrypted] <img width="1470" height="956" alt="Arath_Driver_Format" src="https://github.com/user-attachments/assets/31248132-085a-4b3e-9528-939eff5ac17f" />
 
 ---
 
