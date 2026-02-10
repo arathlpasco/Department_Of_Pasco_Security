@@ -61,7 +61,8 @@ To maintain system hygiene and protect academic data, a dedicated macOS User Pro
 
 ### **Storage Strategy**
 All assets are persistent on an external **2TB SSD**, formatted for optimal Apple Silicon throughput and encrypted for data security.
-![Disk Utility formatting the LaCie drive as APFS Encrypted] <img width="1470" height="956" alt="Arath_Driver_Format" src="https://github.com/user-attachments/assets/31248132-085a-4b3e-9528-939eff5ac17f" />
+
+<img width="1470" height="956" alt="Arath_Driver_Format" src="https://github.com/user-attachments/assets/31248132-085a-4b3e-9528-939eff5ac17f" />
 
 ---
 
@@ -84,18 +85,27 @@ The lab utilizes a dual-homed configuration to isolate internal traffic from the
 ### **Virtual Hardware Configuration**
 The following screenshots confirm the precise mapping of the virtual network adapters and subnets within VMware Fusion.
 
-**Adapter 1 (WAN - em0)** ![VMware settings showing Network Adapter 1 set to Bridged Autodetect](FreeBSD_14_Network_Adapter_Config.png)
+**Adapter 1 (WAN - em0)** 
 
-**Adapter 2 (LAN - em1)** ![VMware settings showing Network Adapter 2 set to Custom DPS_INTERNAL_NETWORK](FreeBSD_14_Network_Adapter_2_Config.png)
+<img width="1920" height="1080" alt="FreeBSD_14_Network_Adapter_Config" src="https://github.com/user-attachments/assets/c47e374a-06d1-4e2e-aeab-a8005b94fa6c" />
 
-**Hypervisor Level Network (Subnet Definition)** ![VMware Network Preferences showing DPS_INTERNAL_NETWORK defined as 10.0.50.0](DPS_Internal_Network_Config.png)
+**Adapter 2 (LAN - em1)** 
+
+<img width="1920" height="1080" alt="FreeBSD_14_Network_Adapter_2_Config" src="https://github.com/user-attachments/assets/6ed8d11c-1e2e-4d8c-abd8-d51849cdbf9a" />
+
+**Hypervisor Level Network (Subnet Definition)
+
+<img width="1920" height="1080" alt="DPS_Internal_Network_Config" src="https://github.com/user-attachments/assets/89dc12e5-2287-4b02-b6c0-85c9e0fdfc23" />
+
 
 ---
 
 ## 4. Console Configuration & Implementation
 The OPNsense kernel was initialized through the terminal console. I successfully transitioned the LAN from the factory default (`192.168.1.1`) to the custom lab subnet (`10.0.50.1`).
 
-**Interface Overview (Post-Provisioning)** ![OPNsense console showing LAN successfully set to 10.0.50.1/24](OPNsense_LAN_WAN.png)
+**Interface Overview (Post-Provisioning)** 
+
+<img width="1470" height="956" alt="OPNsense_LAN_WAN" src="https://github.com/user-attachments/assets/940c9fd7-06e9-4406-aaf9-234c897f381a" />
 
 ### **Key Console Commands & Security**
 * **DHCP Scope**: Established a stateful range of `10.0.50.100` to `10.0.50.200`.
@@ -106,7 +116,10 @@ The OPNsense kernel was initialized through the terminal console. I successfully
 ## 5. Client Integration (Windows 11)
 The internal Windows 11 client was bridged to the `DPS_INTERNAL_NETWORK\`. Upon rebooting, the client successfully "handshaked" with the OPNsense gateway via DHCP.
 
-**Client Network Verification (ipconfig)** ![Windows 11 terminal showing initial assigned IP](Screenshot_2026-02-09_at_1.27.45_AM.png)  
+**Client Network Verification (ipconfig)** 
+
+<img width="1920" height="1080" alt="Worl_Station_Conection_DPS_INTERNAL_NETWORK" src="https://github.com/user-attachments/assets/8e90b9bb-c2ef-418e-868c-daf7231c3665" />
+
 *(Note: Final validation confirmed the transition to the 10.0.50.100+ range after the OPNsense DHCP service was fully initialized.)*
 
 ---
