@@ -1,85 +1,45 @@
-# 🛡️ Department of Pasco Security (DPS) Home Lab
+# Department of Pasco Security (DPS) Home Lab
 
-![Status](https://img.shields.io/badge/Status-Active-success) ![Platform](https://img.shields.io/badge/Platform-VMware%20Fusion-blue) ![OS](https://img.shields.io/badge/OS-OPNsense%20%7C%20FreeBSD-red)
-
-**Author:** Arath Luis Pasco  
-**Date:** February 9, 2026  
+## 🚀 Project Overview
+A simulated enterprise security environment built on **Apple Silicon (M2)** using **VMware Fusion**. This project demonstrates the deployment of a dual-homed **OPNsense** firewall protecting a **Windows 11 Pro** internal segment, providing a sandbox for network security testing, traffic analysis, and firewall policy management.
 
 ---
 
-## 1. Project Overview & System Isolation
-To ensure academic integrity and system hygiene, this project utilizes a strict **Host-Guest Isolation Strategy**. A dedicated macOS User Profile was established to quarantine virtualization experiments from primary system resources and personal files.
+## 🛠️ Infrastructure & Isolation Strategy
 
-### **Storage Infrastructure**
-*   **Medium:** External 2TB SSD.
-*   **Format:** APFS (Encrypted) for optimal Apple Silicon throughput and data security.
-
-> **Note:** All virtual machine assets are persistent on the external volume to prevent internal drive wear and ensure portability.
-
-![Disk Utility formatting the LaCie drive as APFS Encrypted](Images/Arath_Driver_Format.png)
+* **Dedicated Lab Environment**: To maintain system hygiene and protect academic data, I created a **dedicated macOS User Account** specifically for this project. This ensures that virtualization experiments and large VM files remain isolated from my primary school documents and personal files.
+* **Hypervisor**: VMware Fusion 13.x (Pro).
+* **Gateway/Firewall**: OPNsense 24.x (Architecture: arm64/aarch64).
+* **Internal Client**: Windows 11 Pro on ARM.
+* **Storage**: All Virtual Machine assets are hosted on an external **2TB SSD** to manage disk space and improve performance.
 
 ---
 
-## 2. Virtual Engineering & Preparation
+## 🔧 Technical Milestones
 
-### **Image Provisioning**
-The OPNsense raw image was converted to the VMware-native `.vmdk` format using the `qemu-img` utility to ensure hypervisor compatibility.
+### **A. Hypervisor Provisioning**
+Installed VMware Fusion to facilitate local virtualization on macOS. I configured custom virtual network segments to ensure a "Dual-Homed" architecture, separating the lab's internal traffic from the host machine's network.
 
-### **Hardware Compatibility Patch**
-**Issue:** Initial boot failure caused by a driver mismatch with the default NVMe controller.
-**Resolution:** Reconfigured the Virtual Disk Bus to **SATA**, allowing the FreeBSD kernel to successfully initialize the storage volume.
+### **B. Storage Engineering: Disk Conversion**
+The OPNsense raw image required conversion to be compatible with VMware Fusion. I utilized the `qemu-img` utility via the macOS Terminal to transform the image into a VMware-recognized format.
+* **Command**: `qemu-img convert -f raw -O vmdk [source_image].img OPNsense-DPS-Core.vmdk`
+* **Troubleshooting**: Resolved a "No Operating System Found" error by manually adjusting the Virtual Disk Bus type from **NVMe to SATA** in the VM settings to ensure the FreeBSD kernel could initialize the storage.
 
----
+### **C. Dual-Homed Network Architecture**
+Provisioned two distinct virtual network interface cards (vNICs) to establish the "Two-Door" security model:
+1. **WAN (em0)**: Set to **Bridged Mode** to provide the firewall with internet access via the host's Wi-Fi.
+2. **LAN (em1)**: Mapped to a **Custom Host-Only Network** (`DPS_INTERNAL_NETWORK\`), creating a private segment isolated from the internet for internal assets.
 
-## 3. Network Architecture: Dual-Homed Perimeter
-The lab implements a **Dual-Homed** configuration to physically segregate WAN traffic from the private internal network.
-
-| Interface | VMware Mapping | Subnet Designation | Function |
-| :--- | :--- | :--- | :--- |
-| **WAN (em0)** | Bridged (Autodetect) | `DHCP (ISP)` | Internet uplink via host Wi-Fi. |
-| **LAN (em1)** | Custom VNet | `10.0.50.1/24` | Private gateway for `DPS_INTERNAL_NETWORK`. |
-
-### **Virtual Hardware Validation**
-
-**1. Perimeter Uplink (WAN - em0)**  
-*Bridge mode allows the firewall to pull a valid IP directly from the host network.*  
-![VMware settings showing Network Adapter 1 set to Bridged Autodetect](Images/FreeBSD_14_Network_Adapter_Config.png)
-
-**2. Internal Gateway (LAN - em1)**  
-*Strict traffic isolation is enforced via a custom virtual switch.*  
-![VMware settings showing Network Adapter 2 set to Custom DPS_INTERNAL_NETWORK](Images/FreeBSD_14_Network_Adapter_2_Config.png)
-
-**3. Hypervisor Subnet Definition**  
-*The logical definition of the private 10.0.50.0/24 block.*  
-![VMware Network Preferences showing DPS_INTERNAL_NETWORK defined as 10.0.50.0](Images/DPS_Internal_Network_Config.png)
-
----
-
-## 4. Console Configuration
-The OPNsense kernel was initialized via the serial console, transitioning the LAN interface from the factory default (`192.168.1.1`) to the custom lab subnet.
-
-![OPNsense console showing LAN (em0) successfully set to 10.0.50.1/24](Images/OPNsense_LAN_WAN.png)
-
-### **Security & Services**
-*   **DHCP Scope:** Established a stateful lease pool: `10.0.50.100` – `10.0.50.200`.
-*   **Management Encryption:** Generated a self-signed **SHA256 SSL certificate** to enforce HTTPS for web administration.
-
----
-
-## 5. Client Integration (Windows 11)
-The Windows 11 client was bridged to the `DPS_INTERNAL_NETWORK`. Upon boot, the client successfully negotiated a DHCP lease with the OPNsense gateway.
-
-**Verification:**  
-![Windows 11 terminal showing initial assigned IP](Images/Worl_Station_Conection_DPS_INTERNAL_NETWORK.png)  
-*(Validated transition to the 10.0.50.x range post-initialization.)*
+### **D. Gateway Logic & DHCP Configuration**
+Initialized the OPNsense kernel and performed the manual interface assignment.
+* **Static Gateway**: Established the internal gateway at **`10.0.50.1/24`**.
+* **DHCP Scope**: Configured a stateful DHCP pool ranging from **`10.0.50.100` to `10.0.50.200`** to automate addressing for internal clients.
+* **Security**: Generated a **Self-Signed SSL Certificate** for the Web GUI to ensure encrypted management access from the internal segment.
 
 ---
 
 ## 🏛️ Project Reflection & Troubleshooting
-
-### **Phase 1: Key Challenges Resolved**
-| Challenge | Technical Solution |
-| :--- | :--- |
-| **HID Redirection** | Utilized specific scancodes (`fn + Return`) to force console input capture within the virtual environment. |
-| **Hardware Abstraction** | Identified that vNIC additions require a **Cold Boot** (Full Shutdown) for the FreeBSD HAL to register new devices. |
-| **Protocol Validation** | Debugged a configuration loop caused by erroneously entering IPv4 parameters into an IPv6 field. |
+During Phase 1, I successfully navigated several "real-world" IT hurdles:
+* **HID Redirection**: Resolved console input issues by utilizing specific scancodes (`fn + Return`) to communicate with the virtual hardware.
+* **Cold Boot Syncing**: Identified that VMware hardware changes (like adding vNICs) require a full VM shutdown to be recognized by the OPNsense kernel.
+* **Protocol Validation**: Corrected a configuration loop by identifying and resolving an input error where IPv4 parameters were erroneously entered into IPv6 fields.
