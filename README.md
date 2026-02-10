@@ -46,16 +46,12 @@ During Phase 1, I successfully navigated several "real-world" IT hurdles:
 
 * ## 📂 Project Phases
 
+## 📂 Project Phases
+
 <details>
 <summary><b>Click to expand: Phase 1 - Gateway Provisioning (Technical Documentation)</b></summary>
 
 # Technical Documentation: Phase 1 - Gateway Provisioning
-**Project:** Department of Pasco Security (DPS) Home Lab
-**Author:** Arath Luis Pasco
-**Date:** February 9, 2026
-
----
-# Technical Documentation: Phase 1 - Windows 11 Pro Client Station and OPNsense Installation
 **Project:** Department of Pasco Security (DPS) Home Lab  
 **Author:** Arath Luis Pasco  
 **Date:** February 9, 2026  
@@ -123,5 +119,4 @@ During Phase 1, I successfully navigated several "real-world" IT hurdles:
 * **Cold Boot Syncing**: Identified that VMware hardware changes (like adding vNICs) require a full VM shutdown for the OPNsense hardware abstraction layer to recognize the new device.
 * **Protocol Validation**: Corrected a configuration loop by identifying and resolving an input error where IPv4 parameters were erroneously entered into IPv6 fields.
 
----
 </details>
