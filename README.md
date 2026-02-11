@@ -5,6 +5,15 @@ A simulated enterprise security environment built on **Apple Silicon (M2)** usin
 
 ---
 
+## 🧭 Project Architecture
+
+The Department of Pasco Security (DPS) lab utilizes a **Zone-Based Security Model** to separate untrusted external traffic from secure internal assets. Below is the logical and physical topology of the virtualized environment on the M2 Apple Silicon host.
+
+<img width="443" height="697" alt="DPS_Network_Topology drawio" src="https://github.com/user-attachments/assets/4da46afe-7670-4e38-aa9a-9a6f49ee2d2f" />
+
+
+---
+
 ## 🛠️ Infrastructure & Isolation Strategy
 
 * **Dedicated Lab Environment**: To maintain system hygiene and protect academic data, I created a **dedicated macOS User Account** specifically for this project. This ensures that virtualization experiments and large VM files remain isolated from my primary school documents and personal files.
@@ -37,12 +46,6 @@ Initialized the OPNsense kernel and performed the manual interface assignment.
 * **Security**: Generated a **Self-Signed SSL Certificate** for the Web GUI to ensure encrypted management access from the internal segment.
 
 ---
-
-## 🏛️ Project Reflection & Troubleshooting
-During Phase 1, I successfully navigated several "real-world" IT hurdles:
-* **HID Redirection**: Resolved console input issues by utilizing specific scancodes (`fn + Return`) to communicate with the virtual hardware.
-* **Cold Boot Syncing**: Identified that VMware hardware changes (like adding vNICs) require a full VM shutdown to be recognized by the OPNsense kernel.
-* **Protocol Validation**: Corrected a configuration loop by identifying and resolving an input error where IPv4 parameters were erroneously entered into IPv6 fields.
 
 ## 📂 Project Phases
 
