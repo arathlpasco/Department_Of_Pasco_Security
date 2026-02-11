@@ -9,8 +9,9 @@ A simulated enterprise security environment built on **Apple Silicon (M2)** usin
 
 The Department of Pasco Security (DPS) lab utilizes a **Zone-Based Security Model** to separate untrusted external traffic from secure internal assets. Below is the logical and physical topology of the virtualized environment on the M2 Apple Silicon host.
 
+<p align="center">
 <img width="443" height="697" alt="DPS_Network_Topology drawio" src="https://github.com/user-attachments/assets/4da46afe-7670-4e38-aa9a-9a6f49ee2d2f" />
-
+</p>
 
 ---
 
