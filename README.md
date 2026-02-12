@@ -154,17 +154,6 @@ Generated self-signed SHA256 SSL certificate for encrypted Web GUI access.
 
 ---
 
-# 📂 Phase Documentation
-
-<details>
-<summary><b>Click to expand: Phase 0 – Firewall & Initial Segmentation Build</b></summary>
-
-(Insert your detailed technical documentation here.)
-
-</details>
-
----
-
 # 🏛 Engineering Philosophy
 
 - Foundations before complexity
