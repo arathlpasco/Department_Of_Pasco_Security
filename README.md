@@ -57,17 +57,15 @@ Below is the original logical topology.
 
 # 🔮 Future Architecture Expansion (Planned)
 
-            [ External Network ]
-                    |
-               [ Firewall ]
-                    |
-          -----------------------
-          |                     |
-   [ Domain Controller ]   [ Linux Server ]
-          |                     |
-    [ Windows Clients ]    [ Log Server ]
-          |
-     [ Database Server ]
+                     [ External Network ]
+                              |
+                           [ Firewall ]
+                              |
+            ---------------------------------------
+            |                 |                  |
+    [ Domain Controller ]   [ Linux Server ]   [ Log Server ]
+            |                                    |
+    [ Windows Clients ]                      [ Database Server ]
 
 Planned enhancements:
 
